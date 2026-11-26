@@ -50,6 +50,7 @@ def organizar(carpeta):
 
     inicio = time.time()                        # Empieza el cronómetro
     movidos = 0                                 # Contador de archivos movidos
+    conteo = {}
 
     for archivo in carpeta.iterdir():           # Recorre lo que hay adentro
         if archivo.is_file():                   # Ignora las carpetas
@@ -59,9 +60,15 @@ def organizar(carpeta):
             shutil.move(str(archivo), str(destino / archivo.name))
             print(f"  {archivo.name}  ->  {categoria}/")
             movidos += 1                        # Suma uno al contador
+            conteo[categoria] = conteo.get(categoria, 0) + 1
 
     segundos = time.time() - inicio             # Detiene el cronómetro
     print(f"\n¡Listo! Organicé {movidos} archivos en {segundos:.3f} segundos.")
+
+    orden = list(CATEGORIAS) + ["Otros"]
+    detalle = [f"{categoria}: {conteo[categoria]}" for categoria in orden if categoria in conteo]
+    if detalle:
+        print(" · ".join(detalle))
 
 
 # Esto se ejecuta cuando corres:  python organizador.py
