@@ -15,6 +15,7 @@ Solo usa módulos que ya vienen con Python. No hay que instalar nada.
 from pathlib import Path   # Para trabajar con carpetas y archivos
 import shutil              # Para mover archivos
 import time                # Para medir cuánto se demora
+from datetime import datetime
 
 # ------------------------------------------------------------------
 # CONFIGURACIÓN: cambia estos valores para adaptar el organizador
@@ -23,6 +24,8 @@ import time                # Para medir cuánto se demora
 # Carpeta que se va a ordenar. Empezamos con una de prueba para no
 # tocar tu carpeta de Descargas real.
 CARPETA = Path("descargas_de_prueba")
+
+HISTORIAL = Path("historial.txt")
 
 # Cada categoría y las extensiones que le pertenecen
 CATEGORIAS = {
@@ -44,6 +47,15 @@ def categoria_de(archivo):
     return "Otros"                              # Si no está en ninguna
 
 
+def guardar_historial(movimientos):
+    fecha = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open(HISTORIAL, "a", encoding="utf-8") as historial:
+        historial.write(f"=== {fecha} · {len(movimientos)} archivos movidos ===\n")
+        for movimiento in movimientos:
+            historial.write(f"  {movimiento}\n")
+        historial.write("\n")
+
+
 def organizar(carpeta):
     """Mueve cada archivo de la carpeta a la subcarpeta de su categoría."""
     if not carpeta.exists():
@@ -53,6 +65,7 @@ def organizar(carpeta):
     inicio = time.time()                        # Empieza el cronómetro
     movidos = 0                                 # Contador de archivos movidos
     conteo = {}
+    movimientos = []
 
     for archivo in carpeta.iterdir():           # Recorre lo que hay adentro
         if archivo.is_file():                   # Ignora las carpetas
@@ -63,6 +76,7 @@ def organizar(carpeta):
             print(f"  {archivo.name}  ->  {categoria}/")
             movidos += 1                        # Suma uno al contador
             conteo[categoria] = conteo.get(categoria, 0) + 1
+            movimientos.append(f"{archivo.name}  ->  {categoria}/")
 
     segundos = time.time() - inicio             # Detiene el cronómetro
     print(f"\n¡Listo! Organicé {movidos} archivos en {segundos:.3f} segundos.")
@@ -71,6 +85,9 @@ def organizar(carpeta):
     detalle = [f"{categoria}: {conteo[categoria]}" for categoria in orden if categoria in conteo]
     if detalle:
         print(" · ".join(detalle))
+
+    guardar_historial(movimientos)
+    print(f"Lo anoté en '{HISTORIAL}'.")
 
 
 # Esto se ejecuta cuando corres:  python organizador.py

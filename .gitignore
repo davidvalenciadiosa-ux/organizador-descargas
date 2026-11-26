@@ -3,3 +3,5 @@ descargas_de_prueba/
 
 # Archivos que crea Python al ejecutar
 __pycache__/
+
+historial.txt
