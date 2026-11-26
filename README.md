@@ -1,6 +1,6 @@
 # Organizador de Descargas
 
-Toma una carpeta desordenada y mueve cada archivo a una subcarpeta según su tipo: Imagenes, Documentos, Videos, Musica, Comprimidos y Otros.
+Toma una carpeta desordenada y mueve cada archivo a una subcarpeta según su tipo: Imagenes, Documentos, Videos, Musica, Comprimidos, Instaladores y Otros.
 
 > Este README es el punto de partida. Mejorarlo es uno de los issues del equipo.
 
@@ -18,8 +18,8 @@ Si `python` no funciona en tu computador, usa `py`.
 Al terminar, muestra el total de archivos que movió y cuántos fueron a cada categoría:
 
 ```
-¡Listo! Organicé 56 archivos en 0.031 segundos.
-Imagenes: 12 · Documentos: 16 · Videos: 7 · Musica: 6 · Comprimidos: 6 · Otros: 9
+¡Listo! Organicé 56 archivos en 0.025 segundos.
+Imagenes: 12 · Documentos: 16 · Videos: 7 · Musica: 6 · Comprimidos: 6 · Instaladores: 4 · Otros: 5
 ```
 
 `crear_desorden.py` se puede ejecutar las veces que quieras: siempre deja la carpeta revuelta otra vez. Así pruebas sin riesgo, sin tocar tus archivos reales.

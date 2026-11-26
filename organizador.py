@@ -2,7 +2,8 @@
 ORGANIZADOR DE DESCARGAS
 ========================
 Toma una carpeta desordenada y mueve cada archivo a una subcarpeta
-según su tipo: Imagenes, Documentos, Videos, Musica, Comprimidos, Otros.
+según su tipo: Imagenes, Documentos, Videos, Musica, Comprimidos,
+Instaladores, Otros.
 
 Cómo usarlo:
     1. Crea la carpeta de prueba:   python crear_desorden.py
@@ -30,6 +31,7 @@ CATEGORIAS = {
     "Videos":      [".mp4", ".mov", ".avi", ".mkv"],
     "Musica":      [".mp3", ".wav", ".m4a"],
     "Comprimidos": [".zip", ".rar", ".7z"],
+    "Instaladores": [".exe", ".msi"],
 }
 
 
