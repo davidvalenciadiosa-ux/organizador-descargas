@@ -26,11 +26,22 @@ Al terminar, muestra el total de archivos que movió y cuántos fueron a cada ca
 Imagenes: 12 · Documentos: 16 · Videos: 7 · Musica: 6 · Comprimidos: 6 · Instaladores: 4 · Otros: 5
 ```
 
+Cada ejecución queda anotada en `historial.txt`, con la fecha, la hora y los archivos que movió. El historial no se borra: cada vez que lo corres, agrega la ejecución nueva al final.
+
+```
+=== 2026-11-26 15:52:10 · 56 archivos movidos ===
+  IMG_20261103_2041.jpg  ->  Imagenes/
+  hoja_de_vida_2026.pdf  ->  Documentos/
+  ...
+```
+
+`historial.txt` no se sube a GitHub (está en `.gitignore`): es el registro de tu computador.
+
 `crear_desorden.py` se puede ejecutar las veces que quieras: siempre deja la carpeta revuelta otra vez. Así pruebas sin riesgo, sin tocar tus archivos reales.
 
 ## Ejemplo de lo que muestra en pantalla
 
-Mientras trabaja, el script dice a dónde mueve cada archivo. Al final muestra el total y el detalle por categoría:
+Mientras trabaja, el script dice a dónde mueve cada archivo. Al final muestra el total, el detalle por categoría y avisa que lo anotó en el historial:
 
 ```
 Organizando 'descargas_de_prueba'...
@@ -45,6 +56,7 @@ Organizando 'descargas_de_prueba'...
 
 ¡Listo! Organicé 56 archivos en 0.026 segundos.
 Imagenes: 12 · Documentos: 16 · Videos: 7 · Musica: 6 · Comprimidos: 6 · Instaladores: 4 · Otros: 5
+Lo anoté en 'historial.txt'.
 ```
 
 Y la carpeta queda así:
@@ -88,13 +100,15 @@ Para agregar una categoría nueva solo hay que sumar una línea al diccionario `
 | **Diccionario como contador** | `conteo[categoria] = conteo.get(categoria, 0) + 1` | Lleva la cuenta de cuántos archivos van a cada categoría |
 | **Módulos** | `import shutil`, `import time` | Herramientas que ya trae Python: mover archivos y medir el tiempo |
 | **f-string** | `f"Organicé {movidos} archivos"` | Arma un texto con valores adentro |
+| **Archivo en modo `"a"`** | `open(HISTORIAL, "a", encoding="utf-8")` | Escribe al final del archivo sin borrar lo que ya tenía |
 
 ## Cómo está organizado el código
 
 1. **Configuración** (arriba): la carpeta a ordenar y las categorías. Casi todos los cambios empiezan aquí.
 2. **`categoria_de()`**: mira la extensión de un archivo y decide su categoría.
-3. **`organizar()`**: recorre la carpeta, mueve cada archivo y cuenta cuántos movió y cuánto se demoró.
-4. **`if __name__ == "__main__":`**: lo que se ejecuta cuando corres `python organizador.py`.
+3. **`guardar_historial()`**: agrega la ejecución al final de `historial.txt`.
+4. **`organizar()`**: recorre la carpeta, mueve cada archivo, cuenta cuántos movió en total y por categoría, cuánto se demoró, y lo anota en el historial.
+5. **`if __name__ == "__main__":`**: lo que se ejecuta cuando corres `python organizador.py`.
 
 ## Equipo
 
