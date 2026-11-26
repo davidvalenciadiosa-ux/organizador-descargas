@@ -15,6 +15,13 @@ python organizador.py         # la ordena
 
 Si `python` no funciona en tu computador, usa `py`.
 
+Al terminar, muestra el total de archivos que movió y cuántos fueron a cada categoría:
+
+```
+¡Listo! Organicé 56 archivos en 0.031 segundos.
+Imagenes: 12 · Documentos: 16 · Videos: 7 · Musica: 6 · Comprimidos: 6 · Otros: 9
+```
+
 `crear_desorden.py` se puede ejecutar las veces que quieras: siempre deja la carpeta revuelta otra vez. Así pruebas sin riesgo, sin tocar tus archivos reales.
 
 ## Lo que vas a aprender con este script
@@ -28,6 +35,7 @@ Si `python` no funciona en tu computador, usa `py`.
 | **Ciclo `for`** | `for archivo in carpeta.iterdir():` | Repite lo mismo con cada archivo de la carpeta |
 | **Condicional `if`** | `if extension in extensiones:` | Decide qué hacer según una condición |
 | **Contador** | `movidos += 1` | Suma uno cada vez que mueve un archivo |
+| **Diccionario como contador** | `conteo[categoria] = conteo.get(categoria, 0) + 1` | Lleva la cuenta de cuántos archivos van a cada categoría |
 | **Módulos** | `import shutil`, `import time` | Herramientas que ya trae Python: mover archivos y medir el tiempo |
 | **f-string** | `f"Organicé {movidos} archivos"` | Arma un texto con valores adentro |
 
